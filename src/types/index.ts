@@ -42,7 +42,7 @@ export interface SwapiFilm {
 
 // ===== App Domain Types =====
 
-interface Character {
+export interface Character {
   id: string; // Extracted from URL
   name: string;
   height: string;
@@ -58,7 +58,7 @@ interface Character {
   speciesColor: string; // CSS color for card
 }
 
-interface Homeworld {
+export interface Homeworld {
   name: string;
   terrain: string;
   climate: string;
@@ -67,20 +67,20 @@ interface Homeworld {
 
 // ===== Auth Types =====
 
-interface AuthState {
+export interface AuthState {
   isAuthenticated: boolean;
   user: { username: string } | null;
   accessToken: string | null;
 }
 
-interface LoginCredentials {
+export interface LoginCredentials {
   username: string;
   password: string;
 }
 
 // ===== Filter Types =====
 
-interface FilterState {
+export interface FilterState {
   searchQuery: string;
   selectedSpecies: string | null;
   selectedFilm: string | null;
