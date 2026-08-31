@@ -24,20 +24,17 @@ export interface SwapiPlanet {
   terrain: string;
   climate: string;
   population: string;
-  // ... other fields
 }
 
 export interface SwapiSpecies {
   name: string;
   url: string;
-  // ... other fields
 }
 
 export interface SwapiFilm {
   title: string;
   url: string;
   episode_id: number;
-  // ... other fields
 }
 
 // ===== App Domain Types =====
