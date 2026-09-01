@@ -1,5 +1,6 @@
 "use client"
 
+import { LoadingGrid } from "@/components/LoadingGrid"
 import { useCharacters } from "@/hooks/useCharacters"
 
 export default function DashboardPage() {
@@ -13,6 +14,6 @@ export default function DashboardPage() {
   // console.log("Error: ", error)
 
   return (
-    <h1>Hello  World</h1>
+    <LoadingGrid/>
   )
 }
