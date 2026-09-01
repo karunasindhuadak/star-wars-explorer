@@ -1,5 +1,5 @@
-import { SwapiFilm, SwapiPerson, SwapiPlanet, SwapiSpecies } from "@/types";
-import { SWAPI_BASE_URL } from "./constants";
+import { CharacterImage, SwapiFilm, SwapiPerson, SwapiPlanet, SwapiSpecies } from "@/types";
+import { CHARACTER_IMAGE_BASE_URL, SWAPI_BASE_URL } from "./constants";
 
 export async function fetchAllPeople(): Promise<SwapiPerson[]> {
   const response = await fetch(`${SWAPI_BASE_URL}/people`);
@@ -55,4 +55,25 @@ export async function fetchPlanet(url: string): Promise<SwapiPlanet> {
 
   const data = await response.json()
   return data as SwapiPlanet
+}
+
+export async function fetchCharacterImages(): Promise<Map<string, string>> {
+  try {
+    const response = await fetch(CHARACTER_IMAGE_BASE_URL);
+    
+    if (!response.ok) return new Map()
+    
+    const data: CharacterImage[] = await response.json()
+    const imageMap = new Map<string, string>()
+
+    data.forEach((item) => {
+      if (item.name && item.image) {
+        imageMap.set(item.name.toLowerCase().trim(), item.image)
+      }
+    })
+
+    return imageMap
+  } catch {
+    return new Map()
+  }
 }

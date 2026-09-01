@@ -1,5 +1,7 @@
 // ===== API =====
 export const SWAPI_BASE_URL = "https://swapi.info/api";
+export const CHARACTER_IMAGE_BASE_URL =
+  "https://raw.githubusercontent.com/akabab/starwars-api/master/api/all.json";
 export const PAGE_SIZE = 10;
 
 // ===== Auth =====

@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchAllFilms, fetchAllPeople, fetchAllPlanets, fetchAllSpecies } from "@/lib/api";
+import { fetchAllFilms, fetchAllPeople, fetchAllPlanets, fetchAllSpecies, fetchCharacterImages } from "@/lib/api";
 import { extractIdFromUrl, getSpeciesColor } from "@/lib/utils";
 import type { Character, SwapiFilm, SwapiPerson, SwapiPlanet, SwapiSpecies } from "@/types";
 import { useCallback, useEffect, useState } from "react";
@@ -23,6 +23,7 @@ export function useCharacters() {
           fetchAllSpecies(),
           fetchAllFilms(),
           fetchAllPlanets(),
+          fetchCharacterImages()
         ]);
 
         if (cancelled) return;
@@ -33,6 +34,7 @@ export function useCharacters() {
         const filmsData: SwapiFilm[] = results[2].status === "fulfilled" ? results[2].value : [];
         const planetsData: SwapiPlanet[] =
           results[3].status === "fulfilled" ? results[3].value : [];
+        const imageMap: Map<string, string> = results[4].status === "fulfilled" ? results[4].value : new Map()
 
         if (results[0].status === "rejected") {
           throw new Error("Failed to fetch characters. Please try again.");
@@ -51,7 +53,10 @@ export function useCharacters() {
 
           const speciesColor = getSpeciesColor(speciesName);
 
-          const imageUrl = `https://picsum.photos/seed/${id}-${person.name}/200/300`;
+          // const imageUrl = `https://picsum.photos/seed/${id}-${person.name}/200/300`;
+          const realImage = imageMap.get(person.name.toLowerCase().trim())
+          const fallbackImage = `https://ui-avatars.com/api/?name=${encodeURIComponent(person.name)}&size=300&background=1e2540&color=e2e8f0&font-size=0.33`;
+          const imageUrl = realImage ?? fallbackImage
 
           return {
             id,

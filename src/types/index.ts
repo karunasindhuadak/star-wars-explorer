@@ -83,3 +83,8 @@ export interface FilterState {
   selectedFilm: string | null;
   selectedHomeworld: string | null;
 }
+
+export interface CharacterImage {
+  name: string;
+  image: string
+}
