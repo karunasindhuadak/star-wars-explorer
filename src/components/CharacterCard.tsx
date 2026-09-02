@@ -1,7 +1,10 @@
+"use client"
+
 import type { Character } from "@/types";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { motion, type Variants } from "framer-motion";
+import { useState } from "react";
 
 const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -18,6 +21,8 @@ interface CharacterCardProps {
 }
 
 export function CharacterCard({ character, onClick }: CharacterCardProps) {
+  const [imageLoaded, setImageLoaded] = useState(false)
+
   return (
     <motion.div
       variants={cardVariants}
@@ -32,6 +37,9 @@ export function CharacterCard({ character, onClick }: CharacterCardProps) {
     >
       {/*----Character Image----*/}
       <div className="relative w-full h-48 bg-sw-bg overflow-hidden">
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-r from-sw-bg via-sw-surface to-sw-bg animate-pulse" />
+        )}
         <Image
           src={character.imageUrl}
           alt={character.name}
@@ -39,10 +47,13 @@ export function CharacterCard({ character, onClick }: CharacterCardProps) {
           unoptimized
           referrerPolicy="no-referrer"
           loading="eager"
-          className="object-contain"
+          className={`object-contain transition-opacity duration-500 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          onLoad={() => setImageLoaded(true)}
           onError={(e) => {
+            e.currentTarget.onerror = null;
             e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(character.name)}&size=200&background=1e2540&color=e2e8f0&font-size=0.33`;
+            setImageLoaded(true);
           }}
         />
       </div>
@@ -58,7 +69,7 @@ export function CharacterCard({ character, onClick }: CharacterCardProps) {
         <Badge
           className="border-0 text-xs font-medium"
           style={{
-            backgroundColor: `color-mix(in srgb ${character.speciesColor} 15%, transparent)`,
+            backgroundColor: `color-mix(in srgb, ${character.speciesColor} 15%, transparent)`,
             color: character.speciesColor,
           }}
         >

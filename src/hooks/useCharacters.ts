@@ -39,7 +39,7 @@ export function useCharacters() {
         if (results[0].status === "rejected") {
           throw new Error("Failed to fetch characters. Please try again.");
         }
-
+        // Url -> Name
         const speciesMap = new Map<string, string>();
         speciesData.forEach((s) => {
           speciesMap.set(s.url, s.name);

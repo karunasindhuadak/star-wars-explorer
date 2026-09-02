@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { CharacterCard } from "@/components/CharacterCard";
 import { ErrorState } from "@/components/ErrorState";
@@ -13,14 +13,14 @@ const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08
-    }
-  }
+      staggerChildren: 0.08,
+    },
+  },
 };
 
 export default function DashboardPage() {
-  const { characters, isLoading, refetch, error } = useCharacters()
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
+  const { characters, isLoading, refetch, error } = useCharacters();
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
   if (isLoading) {
     return (
