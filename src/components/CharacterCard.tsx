@@ -38,7 +38,7 @@ export function CharacterCard({ character, onClick }: CharacterCardProps) {
       {/*----Character Image----*/}
       <div className="relative w-full h-48 bg-sw-bg overflow-hidden">
         {!imageLoaded && (
-          <div className="absolute inset-0 bg-gradient-to-r from-sw-bg via-sw-surface to-sw-bg animate-pulse" />
+          <div className="absolute inset-0 bg-linear-to-r from-sw-bg via-sw-surface to-sw-bg animate-pulse" />
         )}
         <Image
           src={character.imageUrl}

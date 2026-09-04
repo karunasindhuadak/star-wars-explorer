@@ -7,6 +7,9 @@ import { useCharacters } from "@/hooks/useCharacters";
 import { Character } from "@/types";
 import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
+import { usePagination } from "@/hooks/usePagination";
+import { PAGE_SIZE } from "@/lib/constants";
+import { Pagination } from "@/components/Pagination";
 
 // Stagger Animation Variants
 const containerVariants: Variants = {
@@ -21,6 +24,10 @@ const containerVariants: Variants = {
 export default function DashboardPage() {
   const { characters, isLoading, refetch, error } = useCharacters();
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const { paginatedItems, currentPage, totalPages, goToPage, nextPage, prevPage } = usePagination(
+    characters,
+    PAGE_SIZE,
+  );
 
   if (isLoading) {
     return (
@@ -30,9 +37,11 @@ export default function DashboardPage() {
     );
   }
   if (error) {
-    <main className="max-w-7xl mx-auto px-4 py-8">
-      <ErrorState message={error} onRetry={refetch} />
-    </main>;
+    return (
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        <ErrorState message={error} onRetry={refetch} />
+      </main>
+    );
   }
 
   return (
@@ -49,8 +58,9 @@ export default function DashboardPage() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
+        key={currentPage} // Forces stagger animation to replay on page change
       >
-        {characters.map((character) => (
+        {paginatedItems.map((character) => (
           <CharacterCard
             key={character.id}
             character={character}
@@ -61,6 +71,17 @@ export default function DashboardPage() {
           />
         ))}
       </motion.div>
+
+      {/*Pagination Controls */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalItems={characters.length}
+        pageSize={PAGE_SIZE}
+        onPageChange={goToPage}
+        onNext={nextPage}
+        onPrev={prevPage}
+      />
     </main>
   );
 }
