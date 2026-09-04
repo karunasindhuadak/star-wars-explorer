@@ -11,6 +11,7 @@ import { usePagination } from "@/hooks/usePagination";
 import { PAGE_SIZE } from "@/lib/constants";
 import { Pagination } from "@/components/Pagination";
 import { CharacterModal } from "@/components/CharacterModal";
+import { Navbar } from "@/components/Navbar";
 
 // Stagger Animation Variants
 const containerVariants: Variants = {
@@ -46,50 +47,53 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-4 py-8">
-      {/*Page Header*/}
-      <div className="mb-8">
-        <h1 className="text-3xl font-heading font-bold text-sw-text">Characters</h1>
-        <p className="text-sw-text-muted mt-1">{characters.length} characters found</p>
-      </div>
+    <>
+      <Navbar />
+      <main className="max-w-7xl mx-auto px-4 py-8">
+        {/*Page Header*/}
+        <div className="mb-8">
+          <h1 className="text-3xl font-heading font-bold text-sw-text">Characters</h1>
+          <p className="text-sw-text-muted mt-1">{characters.length} characters found</p>
+        </div>
 
-      {/*Character Grid*/}
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        key={currentPage} // Forces stagger animation to replay on page change
-      >
-        {paginatedItems.map((character) => (
-          <CharacterCard
-            key={character.id}
-            character={character}
-            onClick={() => {
-              setSelectedCharacter(character);
-              console.log("Character: ", character.name);
-            }}
-          />
-        ))}
-      </motion.div>
+        {/*Character Grid*/}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          key={currentPage} // Forces stagger animation to replay on page change
+        >
+          {paginatedItems.map((character) => (
+            <CharacterCard
+              key={character.id}
+              character={character}
+              onClick={() => {
+                setSelectedCharacter(character);
+                console.log("Character: ", character.name);
+              }}
+            />
+          ))}
+        </motion.div>
 
-      {/*Pagination Controls */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        totalItems={characters.length}
-        pageSize={PAGE_SIZE}
-        onPageChange={goToPage}
-        onNext={nextPage}
-        onPrev={prevPage}
-      />
+        {/*Pagination Controls */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalItems={characters.length}
+          pageSize={PAGE_SIZE}
+          onPageChange={goToPage}
+          onNext={nextPage}
+          onPrev={prevPage}
+        />
 
-      {/*Character Modal */}
-      <CharacterModal
-        character={selectedCharacter}
-        open={selectedCharacter !== null}
-        onClose={() => setSelectedCharacter(null)}
-      />
-    </main>
+        {/*Character Modal */}
+        <CharacterModal
+          character={selectedCharacter}
+          open={selectedCharacter !== null}
+          onClose={() => setSelectedCharacter(null)}
+        />
+      </main>
+    </>
   );
 }
