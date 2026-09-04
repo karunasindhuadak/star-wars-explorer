@@ -10,6 +10,7 @@ import { motion, type Variants } from "framer-motion";
 import { usePagination } from "@/hooks/usePagination";
 import { PAGE_SIZE } from "@/lib/constants";
 import { Pagination } from "@/components/Pagination";
+import { CharacterModal } from "@/components/CharacterModal";
 
 // Stagger Animation Variants
 const containerVariants: Variants = {
@@ -66,7 +67,7 @@ export default function DashboardPage() {
             character={character}
             onClick={() => {
               setSelectedCharacter(character);
-              console.log("Character: ", selectedCharacter);
+              console.log("Character: ", character.name);
             }}
           />
         ))}
@@ -81,6 +82,13 @@ export default function DashboardPage() {
         onPageChange={goToPage}
         onNext={nextPage}
         onPrev={prevPage}
+      />
+
+      {/*Character Modal */}
+      <CharacterModal
+        character={selectedCharacter}
+        open={selectedCharacter !== null}
+        onClose={() => setSelectedCharacter(null)}
       />
     </main>
   );
