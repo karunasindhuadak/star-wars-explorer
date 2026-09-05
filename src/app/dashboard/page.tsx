@@ -12,6 +12,7 @@ import { PAGE_SIZE } from "@/lib/constants";
 import { Pagination } from "@/components/Pagination";
 import { CharacterModal } from "@/components/CharacterModal";
 import { Navbar } from "@/components/Navbar";
+import { SearchBar } from "@/components/SearchBar";
 
 // Stagger Animation Variants
 const containerVariants: Variants = {
@@ -30,6 +31,7 @@ export default function DashboardPage() {
     characters,
     PAGE_SIZE,
   );
+  const [searchQuery, setSearchQuery] = useState("")
 
   if (isLoading) {
     return (
@@ -50,6 +52,7 @@ export default function DashboardPage() {
     <>
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 py-8">
+        <SearchBar onSearch={setSearchQuery}/>
         {/*Page Header*/}
         <div className="mb-8">
           <h1 className="text-3xl font-heading font-bold text-sw-text">Characters</h1>
