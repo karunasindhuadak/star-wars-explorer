@@ -4,7 +4,7 @@ import { CharacterCard } from "@/components/CharacterCard";
 import { ErrorState } from "@/components/ErrorState";
 import { LoadingGrid } from "@/components/LoadingGrid";
 import { useCharacters } from "@/hooks/useCharacters";
-import { Character } from "@/types";
+import { Character, FilterState } from "@/types";
 import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { usePagination } from "@/hooks/usePagination";
@@ -13,6 +13,7 @@ import { Pagination } from "@/components/Pagination";
 import { CharacterModal } from "@/components/CharacterModal";
 import { Navbar } from "@/components/Navbar";
 import { SearchBar } from "@/components/SearchBar";
+import { useFilters } from "@/hooks/useFilters";
 
 // Stagger Animation Variants
 const containerVariants: Variants = {
@@ -27,11 +28,20 @@ const containerVariants: Variants = {
 export default function DashboardPage() {
   const { characters, isLoading, refetch, error } = useCharacters();
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const filterState: FilterState = {
+    searchQuery,
+    selectedFilm: null,
+    selectedHomeworld: null,
+    selectedSpecies: null
+  }
+
+  const { filteredCharacters } = useFilters(characters, filterState)
   const { paginatedItems, currentPage, totalPages, goToPage, nextPage, prevPage } = usePagination(
-    characters,
+    filteredCharacters,
     PAGE_SIZE,
   );
-  const [searchQuery, setSearchQuery] = useState("")
 
   if (isLoading) {
     return (
@@ -83,7 +93,7 @@ export default function DashboardPage() {
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          totalItems={characters.length}
+          totalItems={filteredCharacters.length}
           pageSize={PAGE_SIZE}
           onPageChange={goToPage}
           onNext={nextPage}

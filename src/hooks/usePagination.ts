@@ -29,7 +29,7 @@ export function usePagination<T>(items: T[], pageSize: number) {
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [items])
+  }, [items.length])
 
   return {
     currentPage,
