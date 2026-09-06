@@ -51,13 +51,14 @@ export function SearchBar({ onSearch, placeholder = "Search characters..." }: Se
         placeholder={placeholder}
         value={inputValue}
         onChange={(e) => handleChange(e.target.value)}
+        aria-label="Search characters by name"
         className="pl-9 pr-9 bg-sw-surface border-sw-border text-sw-text
                    placeholder:text-sw-text-muted  focus-visible:ring-amber-500/30
                    focus-visible:border-amber-500/50"
       />
 
       {inputValue && (
-        <button onClick={handleClear}>
+        <button onClick={handleClear} aria-label="Clear search">
           <X className="absolute right-3 top-1/2 -translate-y-1/2 text-sw-text-muted hover:text-sw-text transition-colors" />
         </button>
       )}

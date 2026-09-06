@@ -32,7 +32,16 @@ export function CharacterCard({ character, onClick }: CharacterCardProps) {
       }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
-      className="bg-sw-surface border border-sw-border rounded-xl cursor-pointer overflow-hidden transition-colors hover:border-sw-accent/30"
+      role="button"
+      tabIndex={0}
+      aria-label={`View details for ${character.name}`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+      className="bg-sw-surface border border-sw-border rounded-xl cursor-pointer overflow-hidden transition-colors hover:border-sw-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/50"
       style={{ borderLeftWidth: "3px", borderLeftColor: character.speciesColor }}
     >
       {/*----Character Image----*/}

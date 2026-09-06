@@ -17,9 +17,10 @@ export function Navbar() {
     >
       {/* Inner container */}
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Left: App Name */}
+        {/* Left: App Name (abbreviated on very small screens) */}
         <h2 className="text-xl font-heading font-bold tracking-wider text-amber-400">
-          STAR WARS EXPLORER
+          <span className="sm:hidden">SW EXPLORER</span>
+          <span className="hidden sm:inline">STAR WARS EXPLORER</span>
         </h2>
 
         {/* Right: User Menu */}

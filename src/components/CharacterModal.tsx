@@ -30,7 +30,7 @@ export function CharacterModal({character, open, onClose}:CharacterModalProps) {
         if(!isOpen) onClose()
       }}
     >
-      <DialogContent className="bg-sw-surface border-sw-border text-sw-text max-w-lg">
+      <DialogContent className="bg-sw-surface border-sw-border text-sw-text max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle
             className="text-2xl font-heading font-bold"

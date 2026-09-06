@@ -35,7 +35,7 @@ export function FilterPanel({species, films, planets, filterState, onFilterChang
           onFilterChange({selectedSpecies: value === "all" ? null : value})
         }}
       >
-        <SelectTrigger className="bg-sw-surface border-sw-border text-sw-text min-w-[140px]">
+        <SelectTrigger aria-label="Filter by species" className="bg-sw-surface border-sw-border text-sw-text min-w-[140px]">
           <SelectValue placeholder="Species"/>
         </SelectTrigger>
         <SelectContent className="bg-sw-surface border-sw-border">
@@ -57,7 +57,7 @@ export function FilterPanel({species, films, planets, filterState, onFilterChang
           onFilterChange({selectedFilm: value === "all" ? null : value})
         }}
       >
-        <SelectTrigger className="bg-sw-surface border-sw-border text-sw-text min-w-[140px]">
+        <SelectTrigger aria-label="Filter by film" className="bg-sw-surface border-sw-border text-sw-text min-w-[140px]">
           <SelectValue placeholder="Film"/>
         </SelectTrigger>
         <SelectContent className="bg-sw-surface border-sw-border">
@@ -82,7 +82,7 @@ export function FilterPanel({species, films, planets, filterState, onFilterChang
           onFilterChange({selectedHomeworld: value === "all" ? null : value})
         }}
       >
-        <SelectTrigger className="bg-sw-surface border-sw-border text-sw-text min-w-[140px]">
+        <SelectTrigger aria-label="Filter by homeworld" className="bg-sw-surface border-sw-border text-sw-text min-w-[140px]">
           <SelectValue placeholder="Homeworld"/>
         </SelectTrigger>
         <SelectContent className="bg-sw-surface border-sw-border max-h-60">

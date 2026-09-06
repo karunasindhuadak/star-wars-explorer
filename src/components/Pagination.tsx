@@ -55,7 +55,7 @@ export function Pagination({
   const pageNumbers = getPageNumbers(currentPage, totalPages);
 
   return (
-    <div className="flex flex-col items-center gap-4 py-6">
+    <nav aria-label="Pagination" className="flex flex-col items-center gap-4 py-6">
       {/*Showing X–Y of Z characters*/}
       <p className="text-sm text-sw-text-muted">
         Showing{" "}
@@ -71,6 +71,7 @@ export function Pagination({
         <button
           onClick={onPrev}
           disabled={currentPage === 1}
+          aria-label="Go to previous page"
           className="px-3 py-2 text-sm rounded-lg border border-sw-border
                      bg-sw-surface text-sw-text
                      hover:bg-sw-border hover:text-sw-text
@@ -104,6 +105,8 @@ export function Pagination({
               <button
                 key={page}
                 onClick={() => onPageChange(page)}
+                aria-current={isActive ? "page" : undefined}
+                aria-label={`Go to page ${page}`}
                 className={`w-9 h-9 text-sm rounded-lg transition-colors ${
                   isActive
                     ? "bg-amber-500/90 text-sw-bg font-bold"
@@ -120,6 +123,7 @@ export function Pagination({
         <button
           onClick={onNext}
           disabled={currentPage === totalPages}
+          aria-label="Go to next page"
           className="px-3 py-2 text-sm rounded-lg border border-sw-border
                      bg-sw-surface text-sw-text
                      hover:bg-sw-border hover:text-sw-text
@@ -129,6 +133,6 @@ export function Pagination({
           Next →
         </button>
       </div>
-    </div>
+    </nav>
   );
 }
