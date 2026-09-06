@@ -16,22 +16,15 @@ interface FilterPanelProps {
   planets: SwapiPlanet[];       
   filterState: FilterState;
   onFilterChange: (updates: Partial<FilterState>) => void
+  onClearFilters: () => void
 }
 
-export function FilterPanel({species, films, planets, filterState, onFilterChange}: FilterPanelProps)  {
+export function FilterPanel({species, films, planets, filterState, onFilterChange, onClearFilters}: FilterPanelProps)  {
   const activeFilterCount = [
     filterState.selectedSpecies,
     filterState.selectedFilm,
     filterState.selectedHomeworld
   ].filter(Boolean).length
-
-  function handleClearAll() {
-    onFilterChange({
-      selectedSpecies: null,
-      selectedFilm: null,
-      selectedHomeworld: null
-    })
-  }
 
   return (
     <div className="flex flex-wrap items-center gap-3">
@@ -114,7 +107,7 @@ export function FilterPanel({species, films, planets, filterState, onFilterChang
             {activeFilterCount} active
           </Badge>
           <button
-            onClick={handleClearAll}
+            onClick={onClearFilters}
             className="text-sm text-sw-text-muted hover:text-amber-400 transition-colors"
           >
             Clear All

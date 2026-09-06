@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import {motion} from "framer-motion"
-import { formatDate, formatHeight, formatMass } from "@/lib/utils";
+import { formatDate, formatHeight, formatMass, formatPopulation } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 import { Skeleton } from "./ui/skeleton";
 
@@ -66,18 +66,22 @@ export function CharacterModal({character, open, onClose}:CharacterModalProps) {
             {homeworldLoading ? (
               <div className="space-y-2">
                 <Skeleton className="h-5 w-3/4 bg-sw-border"/>
-                <Skeleton className="h-5 w-3/4 bg-sw-border"/>
+                <Skeleton className="h-5 w-1/2 bg-sw-border"/>
+                <Skeleton className="h-5 w-2/3 bg-sw-border"/>
               </div>
-            ) : (
-                <motion.p
+            ) : homeworld ? (
+                <motion.div
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 transition={{duration: 0.3}}
-                className="text-lg font-medium text-sw-text"
+                className="grid grid-cols-2 gap-4"
                 >
-                  {homeworld}
-                </motion.p>
-            )}
+                  <StatItem label="Planet" value={homeworld.name} />
+                  <StatItem label="Terrain" value={homeworld.terrain} />
+                  <StatItem label="Climate" value={homeworld.climate} />
+                  <StatItem label="Residents" value={formatPopulation(homeworld.population)} />
+                </motion.div>
+            ) : null}
           </div>
         </motion.div>
       </DialogContent>
@@ -94,3 +98,5 @@ function StatItem({label, value}: {label: string, value: string}) {
     </div>
   )
 }
+
+

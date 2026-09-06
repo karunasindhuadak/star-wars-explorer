@@ -43,6 +43,15 @@ function getSpeciesColor(speciesName: string) {
   return SPECIES_COLORS[speciesName] || SPECIES_COLORS["Unknown"];
 }
 
+function formatPopulation(population: string): string {
+  if (population === "unknown") return "Unknown";
+
+  const num = Number(population);
+  if (isNaN(num)) return population;
+
+  return num.toLocaleString();
+}
+
 export {
   cn,
   formatHeight,
@@ -50,4 +59,5 @@ export {
   formatDate,
   extractIdFromUrl,
   getSpeciesColor,
+  formatPopulation
 };

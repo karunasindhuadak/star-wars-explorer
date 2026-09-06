@@ -45,6 +45,12 @@ export function useCharacters() {
           speciesMap.set(s.url, s.name);
         });
 
+        // Url -> Name (same pattern as speciesMap)
+        const planetMap = new Map<string, string>();
+        planetsData.forEach((p) => {
+          planetMap.set(p.url, p.name);
+        });
+
         const transformedCharacters: Character[] = peopleData.map((person) => {
           const id = extractIdFromUrl(person.url);
 
@@ -52,6 +58,8 @@ export function useCharacters() {
             person.species.length > 0 ? speciesMap.get(person.species[0]) || "Unknown" : "Unknown";
 
           const speciesColor = getSpeciesColor(speciesName);
+
+          const homeworldName = planetMap.get(person.homeworld) || "Unknown";
 
           // const imageUrl = `https://picsum.photos/seed/${id}-${person.name}/200/300`;
           const realImage = imageMap.get(person.name.toLowerCase().trim())
@@ -66,6 +74,7 @@ export function useCharacters() {
             birthYear: person.birth_year,
             gender: person.gender,
             homeworldUrl: person.homeworld,
+            homeworldName,
             speciesUrls: person.species,
             filmUrls: person.films,
             created: person.created,

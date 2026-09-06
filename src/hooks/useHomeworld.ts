@@ -1,13 +1,15 @@
 "use client"
 
 import { fetchPlanet } from "@/lib/api";
+import type { Homeworld } from "@/types";
 import { useEffect, useRef, useState } from "react"
 
 
-const planetCache = new Map<string, string>()
+// URL -> full object(Homeworld)
+const planetCache = new Map<string, Homeworld>()
 
 export function useHomeworld(url: string) {
-  const[homeworld, setHomeworld] = useState<string | null>(null)
+  const [homeworld, setHomeworld] = useState<Homeworld | null>(null)
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fetchedUrlRef = useRef<string | null>(null);
@@ -34,9 +36,17 @@ export function useHomeworld(url: string) {
       try {
         const planet = await fetchPlanet(url)
 
+        // Build the Homeworld object 
+        const homeworldData: Homeworld = {
+          name: planet.name,
+          terrain: planet.terrain,
+          climate: planet.climate,
+          population: planet.population,
+        }
+
         if (!cancelled) {
-          planetCache.set(url, planet.name)
-          setHomeworld(planet.name)
+          planetCache.set(url, homeworldData)  // Cache the full object
+          setHomeworld(homeworldData)           // Store the full object
         }
       } catch (err) {
         if (!cancelled) {
@@ -62,3 +72,4 @@ export function useHomeworld(url: string) {
     error
   }
 }
+

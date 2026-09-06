@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -9,42 +9,42 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
-export function SearchBar({onSearch, placeholder = "Search characters...",}: SearchBarProps) {
-  const [inputValue, setInputValue] = useState("")
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
+export function SearchBar({ onSearch, placeholder = "Search characters..." }: SearchBarProps) {
+  const [inputValue, setInputValue] = useState("");
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   function handleChange(value: string) {
-    setInputValue(value)
+    setInputValue(value);
 
     if (timerRef.current) {
-      clearTimeout(timerRef.current)
+      clearTimeout(timerRef.current);
     }
 
     timerRef.current = setTimeout(() => {
-      onSearch(value)  // Fires only after 300ms of silence
-    }, 300)
+      onSearch(value); // Fires only after 300ms of silence
+    }, 300);
   }
 
   function handleClear() {
-    setInputValue("")
-    onSearch("")
+    setInputValue("");
+    onSearch("");
 
     if (timerRef.current) {
-      clearTimeout(timerRef.current)
+      clearTimeout(timerRef.current);
     }
   }
 
   useEffect(() => {
     return () => {
       if (timerRef.current) {
-        clearTimeout(timerRef.current)
+        clearTimeout(timerRef.current);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <div className="relative w-full max-w-sm">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-sw-text-muted"/>
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-sw-text-muted" />
 
       <Input
         type="text"
@@ -57,13 +57,10 @@ export function SearchBar({onSearch, placeholder = "Search characters...",}: Sea
       />
 
       {inputValue && (
-        <button
-          onClick={handleClear}
-
-        >
-          <X className="absolute right-3 top-1/2 -translate-y-1/2 text-sw-text-muted hover:text-sw-text transition-colors"/>
+        <button onClick={handleClear}>
+          <X className="absolute right-3 top-1/2 -translate-y-1/2 text-sw-text-muted hover:text-sw-text transition-colors" />
         </button>
       )}
     </div>
-  )
+  );
 }

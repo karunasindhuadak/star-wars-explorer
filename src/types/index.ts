@@ -24,6 +24,7 @@ export interface SwapiPlanet {
   terrain: string;
   climate: string;
   population: string;
+  url: string;
 }
 
 export interface SwapiSpecies {
@@ -47,6 +48,7 @@ export interface Character {
   birthYear: string;
   gender: string;
   homeworldUrl: string;
+  homeworldName: string; // Resolved planet name ("Tatooine", "Alderaan", etc.)
   speciesUrls: string[];
   filmUrls: string[];
   created: string;
