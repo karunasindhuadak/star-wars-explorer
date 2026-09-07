@@ -5,7 +5,7 @@ import { ErrorState } from "@/components/ErrorState";
 import { LoadingGrid } from "@/components/LoadingGrid";
 import { useCharacters } from "@/hooks/useCharacters";
 import { Character, FilterState } from "@/types";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { usePagination } from "@/hooks/usePagination";
 import { PAGE_SIZE } from "@/lib/constants";
@@ -41,6 +41,12 @@ export default function DashboardPage() {
     filteredCharacters,
     PAGE_SIZE,
   );
+
+  const headerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    headerRef.current?.scrollIntoView({behavior: "smooth"})
+  }, [currentPage])
 
   function handleFilterChange(updates: Partial<FilterState>) {
     setFilterState((prev) => ({ ...prev, ...updates }));
@@ -88,7 +94,7 @@ export default function DashboardPage() {
         </div>
 
         {/*Page Header*/}
-        <div className="mb-8">
+        <div ref={headerRef} className="mb-8">
           <h1 className="text-3xl font-heading font-bold text-sw-text">Characters</h1>
           <p className="text-sw-text-muted mt-1">{characters.length} characters found</p>
         </div>

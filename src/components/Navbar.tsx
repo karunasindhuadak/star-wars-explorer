@@ -10,7 +10,14 @@ import {
 import { LogOut, ChevronDown } from "lucide-react";
 
 export function Navbar() {
-  const {user, logout} = useAuth()
+  const { user, logout } = useAuth()
+  
+  function handleScroll() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }
   return (
     <nav
       className="sticky top-0 z-50 w-full border-b border-sw-border backdrop-blur-md bg-sw-bg/80"
@@ -18,7 +25,7 @@ export function Navbar() {
       {/* Inner container */}
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Left: App Name (abbreviated on very small screens) */}
-        <h2 className="text-xl font-heading font-bold tracking-wider text-amber-400">
+        <h2 onClick={handleScroll} className="text-xl font-heading font-bold tracking-wider text-amber-400 cursor-pointer">
           <span className="sm:hidden">SW EXPLORER</span>
           <span className="hidden sm:inline">STAR WARS EXPLORER</span>
         </h2>
