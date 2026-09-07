@@ -49,7 +49,7 @@ function formatPopulation(population: string): string {
   const num = Number(population);
   if (isNaN(num)) return population;
 
-  return num.toLocaleString();
+  return num.toLocaleString("en-US");
 }
 
 export {
