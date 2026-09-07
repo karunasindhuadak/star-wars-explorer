@@ -96,7 +96,7 @@ export default function DashboardPage() {
         {/*Page Header*/}
         <div ref={headerRef} className="mb-8">
           <h1 className="text-3xl font-heading font-bold text-sw-text">Characters</h1>
-          <p className="text-sw-text-muted mt-1">{characters.length} characters found</p>
+          <p className="text-sw-text-muted mt-1">{filteredCharacters.length} characters found</p>
         </div>
 
         {/*Character Grid*/}
