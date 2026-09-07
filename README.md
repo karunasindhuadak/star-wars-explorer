@@ -9,22 +9,22 @@ Check out the live deployment here: [Star Wars Explorer Live Demo](https://star-
 ## 📸 Screenshots
 
 ### 1. Login Screen
-![Login Screen](/screenshots/login.jpg)
+![Login Screen](/public/screenshots/login.jpg)
 
 ### 2. Dashboard
-![Dashboard Overview](/screenshots/dashboard.jpg)
+![Dashboard Overview](/public/screenshots/dashboard.jpg)
 
 ### 3. Character Modal
-![Character Details Modal](/screenshots/modal.jpg)
+![Character Details Modal](/public/screenshots/modal.jpg)
 
 ### 4. Active Search & Filters
-![Search Active](/screenshots/search_active.jpg)
+![Search Active](/public/screenshots/search_active.jpg)
 
 ### 5. Loading State
-![Loading Skeletons](/screenshots/loading.jpg)
+![Loading Skeletons](/public/screenshots/loading.jpg)
 
 ### 6. Error States
-![Error State](/screenshots/error_states.jpg)
+![Error State](/public/screenshots/error_states.jpg)
 
 ---
 
